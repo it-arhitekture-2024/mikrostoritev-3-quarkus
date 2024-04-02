@@ -1,18 +1,15 @@
 package si.um.feri.demo.rest;
 
-import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.jboss.logging.Logger;
 import si.um.feri.demo.dao.GradeRepository;
 import si.um.feri.demo.vao.Grade;
+import si.um.feri.demo.vao.GradeDTO;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.jboss.logging.Logger;
-import si.um.feri.demo.vao.GradeDTO;
-
 
 @Path("/grades")
 public class GradeResource {
@@ -43,5 +40,20 @@ public class GradeResource {
                 });
     }
 
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Uni<Void> updateGrade(@PathParam("id") String id, Grade grade) {
+        LOG.infof("Posodabljanje ocene z ID: %s", id);
+        return gradeRepository.updateGrade(id, grade);
+    }
 
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Uni<Void> deleteGrade(@PathParam("id") String id) {
+        LOG.infof("Brisanje ocene z ID: %s", id);
+        return gradeRepository.deleteGrade(id);
+    }
 }
