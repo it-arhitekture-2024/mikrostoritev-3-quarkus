@@ -17,7 +17,6 @@ public class GradeResourceTest {
 
     @Test
     public void testGetAllGradesEndpoint() {
-        // Using RestAssured for testing
         given()
                 .when().get("/grades")
                 .then()
