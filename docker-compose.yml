@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    networks:
+      - my_network
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  quarkus_reactive_demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quarkus_reactive_demo_container
+    networks:
+      - my_network
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongodb_container:27017
+      - QUARKUS_MONGODB_DATABASE=SchoolEvidence
+
+networks:
+  my_network:
+
+volumes:
+  mongodb_data:
