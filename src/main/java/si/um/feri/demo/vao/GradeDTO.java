@@ -7,17 +7,6 @@ public class GradeDTO {
     public int gradeValue;
     public String description;
 
-    @Override
-    public String toString() {
-        return "\n    {\n" +
-                "       studentId = '" + studentId + "',\n" +
-                "       professorId = '" + professorId + "',\n" +
-                "       subjectId = '" + subjectId + "',\n" +
-                "       gradeValue = " + gradeValue + ",\n" +
-                "       description = '" + description + "'\n" +
-                '}';
-    }
-
 
     public GradeDTO(Grade grade) {
         this.studentId = grade.studentId;
