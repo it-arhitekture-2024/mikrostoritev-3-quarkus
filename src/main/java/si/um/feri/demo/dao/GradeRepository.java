@@ -33,7 +33,7 @@ public class GradeRepository implements ReactivePanacheMongoRepository<Grade> {
                     existingGrade.subjectId = updatedGrade.subjectId;
                     existingGrade.gradeValue = updatedGrade.gradeValue;
                     existingGrade.description = updatedGrade.description;
-                    return existingGrade.persist().replaceWithVoid();
+                    return existingGrade.update().replaceWithVoid();
                 });
     }
 
